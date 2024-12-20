@@ -10,10 +10,6 @@ float minSensitivity = 99999; // Minimum sensitivity (initialize with a large va
 bool isResponding = false;    // Flag to track response measurement
 const float THRESHOLD = 10;   // Change threshold to detect response (lux)
 
-// Variables for frequency response
-unsigned long frequencyStartTime = 0; // Start time for frequency calculation
-int responseCount = 0;                // Count of significant light changes
-
 void setup() {
   Serial.begin(9600);
 

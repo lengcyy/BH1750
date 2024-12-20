@@ -7,7 +7,6 @@ BH1750 lightMeter;
 float lastLux = 0;         // Previous light level
 float sensitivity = 0;     // Sensor sensitivity
 float minSensitivity = 99999; // Minimum sensitivity (initialize with a large value)
-unsigned long startTime = 0;  // Start time of light level change
 bool isResponding = false;    // Flag to track response measurement
 const float THRESHOLD = 10;   // Change threshold to detect response (lux)
 

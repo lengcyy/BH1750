@@ -4,8 +4,6 @@
 BH1750 lightMeter;
 
 // Variables to calculate sensitivity and response time
-
-const float THRESHOLD = 10;   // Change threshold to detect response (lux)
 float minLux = 10000;
 float maxLux = 0;
 

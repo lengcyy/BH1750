@@ -3,12 +3,10 @@
 
 BH1750 lightMeter;
 
-// Variables to calculate sensitivity and response time
+// Variables to calculate sensitivity
 float lastLux = 0;         // Previous light level
 float sensitivity = 0;     // Sensor sensitivity
 float minSensitivity = 99999; // Minimum sensitivity (initialize with a large value)
-bool isResponding = false;    // Flag to track response measurement
-const float THRESHOLD = 10;   // Change threshold to detect response (lux)
 
 void setup() {
   Serial.begin(9600);
@@ -19,10 +17,7 @@ void setup() {
   // Initialize the BH1750 sensor
   lightMeter.begin();
 
-  Serial.println(F("BH1750 Test begin"));
-
-  // Inform the user how to use the Serial Plotter
-  Serial.println("Open Serial Plotter (Tools > Serial Plotter) to view the graph.");
+  Serial.println(F("BH1750 Sensitivity Measurement Begin"));
 }
 
 void loop() {
@@ -36,28 +31,14 @@ void loop() {
     minSensitivity = abs(sensitivity);
   }
 
-  // Check if the light level changes significantly
-  if (abs(sensitivity) > THRESHOLD) {
-    if (!isResponding) {
-      // Start measuring response time
-      startTime = millis();
-      isResponding = true;
-      Serial.println("Significant light change detected. Measuring response time...");
-    }
-    // Increment response count for frequency calculation
-    responseCount++;
-  }
-
-  // Check if the light level has stabilized
-  
-  // Print light level, sensitivity, and minimum sensitivity for plotting
+  // Print light level, sensitivity, and minimum sensitivity
   Serial.print("Lux: ");
   Serial.print(lux); // Light level (lux)
 
-  Serial.print(" | Difference: ");
+  Serial.print(" | Sensitivity: ");
   Serial.print(abs(sensitivity)); // Sensitivity
 
-  Serial.print(" | Sensitivity: ");
+  Serial.print(" | Min Sensitivity: ");
   Serial.println(minSensitivity); // Minimum sensitivity
 
   // Update the lastLux variable for the next loop
